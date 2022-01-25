@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -7,8 +8,8 @@ import org.testng.annotations.Test;
 public class SignUpTest {
 
     @Test
-    public void sendFiveDigitsToZipCodeFieldTest(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void sendFiveDigitsToZipCodeFieldTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -20,12 +21,11 @@ public class SignUpTest {
         boolean isRegisterButtonIsDisplayed = driver.findElement(By.cssSelector("[value=Register]")).isDisplayed();
         driver.quit();
         Assert.assertTrue(isRegisterButtonIsDisplayed, "Register button isn't shown");
-
-
     }
+
     @Test
-    public void sendFourDigitsToZipCodeTest(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void sendFourDigitsToZipCodeTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -35,16 +35,14 @@ public class SignUpTest {
         driver.findElement(By.cssSelector("[value=Continue]")).click();
         //Check error message is shown
         boolean isErrorMessageShown = driver.findElement(By.className("error_message")).isDisplayed();
-
         driver.quit();
-
         Assert.assertTrue(isErrorMessageShown, "Error message isn't show");
-
     }
+
     //***************************Exception**********************************
     @Test
-    public void sendSixDigitsToZipCodeTest(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void sendSixDigitsToZipCodeTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -56,17 +54,15 @@ public class SignUpTest {
         try {
             boolean isErrorMessageShown = driver.findElement(By.className("error_message")).isDisplayed();
         } catch (Exception e) {
-           Assert.assertTrue(false,"Bug!!!  ZIP code should have 5 digits");
-        }finally {
+            Assert.assertTrue(false, "Bug!!!  ZIP code should have 5 digits");
+        } finally {
             driver.quit();
         }
-    //************************************************************************
-
     }
 
     @Test
-    public void sendSignUpForm(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void sendSignUpFormTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -87,9 +83,10 @@ public class SignUpTest {
         driver.quit();
         Assert.assertTrue(isSuccessMessageShown, "Success message isn't shown");
     }
+
     @Test
-    public void registrationAllEmptyFields(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void registrationAllEmptyFieldsTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -109,12 +106,11 @@ public class SignUpTest {
         boolean isErrorMessageShown = driver.findElement(By.className("error_message")).isDisplayed();
         driver.quit();
         Assert.assertTrue(isErrorMessageShown, "Invalid fields");
-
     }
 
     @Test
-    public void checkFirstNameField(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void checkFirstNameFieldTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -135,10 +131,11 @@ public class SignUpTest {
         driver.quit();
         Assert.assertTrue(isErrorMessageShown, "Invalid field 'First Name'");
     }
+
     @Test
-        public void checkLastNameField(){
+    public void checkLastNameFieldTest() {
         //field 'Last Name' is not mandatory
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -159,9 +156,10 @@ public class SignUpTest {
         driver.quit();
         Assert.assertTrue(isSuccessMessageShown, "Success message isn't shown");
     }
+
     @Test
-    public void registrationWithInvalidEmail(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void registrationWithInvalidEmailTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -181,11 +179,11 @@ public class SignUpTest {
         boolean isErrorMessageShown = driver.findElement(By.className("error_message")).isDisplayed();
         driver.quit();
         Assert.assertTrue(isErrorMessageShown, "Invalid field 'Email'");
-
     }
+
     @Test
-    public void PassAreNotMatch() {
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void passAreNotMatchTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -205,15 +203,15 @@ public class SignUpTest {
         try {
             boolean isErrorMessageShown = driver.findElement(By.className("error_message")).isDisplayed();
         } catch (Exception e) {
-            Assert.assertTrue(false,"Bug!!! 'Password' and 'Confirm password' fields must match. Registration must not occur");
-        }finally {
+            Assert.assertTrue(false, "Bug!!! 'Password' and 'Confirm password' fields must match. Registration must not occur");
+        } finally {
             driver.quit();
         }
-
     }
+
     @Test
-    public void inputSpecialCharactersIntoFields(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void inputSpecialCharactersIntoFieldsTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -233,11 +231,11 @@ public class SignUpTest {
         boolean isErrorMessageShown = driver.findElement(By.className("error_message")).isDisplayed();
         driver.quit();
         Assert.assertTrue(isErrorMessageShown, "Invalid fields");
-
     }
+
     @Test
-    public void inputPasswordWithoutSymbols(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void inputPasswordWithoutSymbolsTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -257,11 +255,11 @@ public class SignUpTest {
         boolean isErrorMessageShown = driver.findElement(By.className("error_message")).isDisplayed();
         driver.quit();
         Assert.assertTrue(isErrorMessageShown, "Invalid field 'Password");
-
     }
+
     @Test
-    public void inputConfirmPasswordWithoutSymbols(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void inputConfirmPasswordWithoutSymbolsTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -281,11 +279,11 @@ public class SignUpTest {
         boolean isErrorMessageShown = driver.findElement(By.className("error_message")).isDisplayed();
         driver.quit();
         Assert.assertTrue(isErrorMessageShown, "Invalid field 'Confirm Password'");
-
     }
+
     @Test
-    public void inputUpperCaseIntoFields(){
-        System.setProperty("webdriver.chrome.driver","src/test/resources/chromedriver.exe");
+    public void inputUpperCaseIntoFieldsTest() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Open Zip code page
         driver.get("https://www.sharelane.com/cgi-bin/register.py");
@@ -305,9 +303,5 @@ public class SignUpTest {
         boolean isSuccessMessageShown = driver.findElement(By.className("confirmation_message")).isDisplayed();
         driver.quit();
         Assert.assertTrue(isSuccessMessageShown, "Success message isn't shown");
-
     }
-
-
-
 }
