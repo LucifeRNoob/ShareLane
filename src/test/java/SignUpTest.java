@@ -53,8 +53,9 @@ public class SignUpTest {
         //Check error message is shown
         try {
             boolean isErrorMessageShown = driver.findElement(By.className("error_message")).isDisplayed();
-        } catch (Exception e) {
-            Assert.assertTrue(false, "Bug!!!  ZIP code should have 5 digits");
+            Assert.assertTrue(isErrorMessageShown,"Error message isn't shown");
+        } catch (NoSuchElementException e) {
+            Assert.fail( "Bug!!!  ZIP code should have 5 digits");
         } finally {
             driver.quit();
         }
@@ -202,8 +203,9 @@ public class SignUpTest {
         //Verify that user isn't created an account
         try {
             boolean isErrorMessageShown = driver.findElement(By.className("error_message")).isDisplayed();
-        } catch (Exception e) {
-            Assert.assertTrue(false, "Bug!!! 'Password' and 'Confirm password' fields must match. Registration must not occur");
+            Assert.assertTrue(isErrorMessageShown,"Fields doesn't match");
+        } catch (NoSuchElementException e) {
+            Assert.fail("Bug!!! 'Password' and 'Confirm password' fields must match. Registration must not occur");
         } finally {
             driver.quit();
         }
